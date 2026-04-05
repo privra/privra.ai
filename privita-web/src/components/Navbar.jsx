@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown, Menu, X, Cloud, Server, ShieldCheck, PlayCircle, Target, Milestone, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ChevronDown, Menu, X, Cloud, Server, ShieldCheck, PlayCircle } from 'lucide-react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,21 +24,24 @@ const Navbar = () => {
         {
             title: 'Try Privra AI',
             items: [
-                { name: 'Privra AI Docker', icon: <PlayCircle className="h-5 w-5" />, desc: 'Run locally in minutes', href: 'https://hub.docker.com/r/vjvkram/privra' }
+                { name: 'Privra AI Docker', icon: <PlayCircle className="h-5 w-5" />, desc: 'Run locally in minutes', href: 'https://hub.docker.com/r/privra/privra-ai' }
             ]
         }
     ];
 
     const demos = [
         {
-            name: 'Security Scenarios',
-            icon: <PlayCircle className="h-5 w-5" />,
-            desc: 'See Privra AI in action across real scenarios',
-            href: 'https://hub.docker.com/r/vjvkram/privra'
+            title: 'Live Demos',
+            items: [
+                {
+                    name: 'Gatekeeper Security Showcase',
+                    icon: <ShieldCheck className="h-5 w-5" />,
+                    desc: 'Real-time side-by-side security analysis',
+                    href: '/demo'
+                }
+            ]
         }
     ];
-
-
 
     const dropdownData = { products, demos };
 
@@ -82,51 +86,41 @@ const Navbar = () => {
                                     {link.dropdown && activeDropdown === link.dropdown && (
                                         <div
                                             onMouseLeave={() => setActiveDropdown(null)}
-                                            className={`absolute left-1/2 -translate-x-1/2 mt-2 top-full bg-[#131d33] border border-white/10 rounded-xl shadow-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-300 z-[100] ${link.dropdown === 'products' ? 'w-[600px]' : 'w-80'}`}
+                                            className={`absolute left-1/2 -translate-x-1/2 mt-2 top-full bg-[#131d33] border border-white/10 rounded-xl shadow-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-300 z-[100] ${link.dropdown === 'products' ? 'w-[600px]' : 'w-96'}`}
                                         >
-                                            <div className={`${link.dropdown === 'products' ? 'grid grid-cols-2 gap-8' : 'space-y-1'}`}>
-                                                {link.dropdown === 'products' ? (
-                                                    products.map((section) => (
-                                                        <div key={section.title}>
+                                            <div className={`${link.dropdown === 'products' ? 'grid grid-cols-2 gap-8' : 'space-y-6'}`}>
+                                                {dropdownData[link.dropdown].map((section, idx) => (
+                                                    <div key={section.title || idx}>
+                                                        {section.title && (
                                                             <div className="text-cyan-400 font-['Bebas_Neue'] text-xl tracking-widest mb-4 px-2 opacity-70 uppercase">
                                                                 {section.title}
                                                             </div>
-                                                            <div className="space-y-1">
-                                                                {section.items.map((item) => (
-                                                                    <a
-                                                                        key={item.name}
-                                                                        href={item.href || '#'}
-                                                                        target={item.href && item.href.startsWith('http') ? '_blank' : undefined}
-                                                                        rel={item.href && item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                                                        className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-all group/item"
-                                                                    >
-                                                                        <div className="mt-1 text-cyan-400 group-hover/item:scale-110 transition-transform">{item.icon}</div>
-                                                                        <div>
-                                                                            <div className="text-white font-semibold text-sm leading-tight">{item.name}</div>
-                                                                            <div className="text-gray-400 text-xs mt-0.5">{item.desc}</div>
-                                                                        </div>
-                                                                    </a>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    ))
-                                                ) : (
-                                                    demos.map((item) => (
-                                                        <a
-                                                            key={item.name}
-                                                            href={item.href || '#'}
-                                                            target={item.href && item.href.startsWith('http') ? '_blank' : undefined}
-                                                            rel={item.href && item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                                            className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-all group/item"
-                                                        >
-                                                            <div className="mt-1 text-cyan-400 group-hover/item:scale-110 transition-transform">{item.icon}</div>
-                                                            <div>
-                                                                <div className="text-white font-semibold text-sm leading-tight">{item.name}</div>
-                                                                <div className="text-gray-400 text-xs mt-0.5">{item.desc}</div>
-                                                            </div>
-                                                        </a>
-                                                    ))
-                                                )}
+                                                        )}
+                                                        {section.items.map((item) => {
+                                                            const isInternal = item.href && item.href.startsWith('/');
+                                                            const Component = isInternal ? Link : 'a';
+                                                            const props = isInternal ? { to: item.href } : {
+                                                                href: item.href || '#',
+                                                                target: item.href && item.href.startsWith('http') ? '_blank' : undefined,
+                                                                rel: item.href && item.href.startsWith('http') ? 'noopener noreferrer' : undefined
+                                                            };
+
+                                                            return (
+                                                                <Component
+                                                                    key={item.name}
+                                                                    {...props}
+                                                                    className="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-all group/item"
+                                                                >
+                                                                    <div className="mt-1 text-cyan-400 group-hover/item:scale-110 transition-transform">{item.icon}</div>
+                                                                    <div>
+                                                                        <div className="text-white font-semibold text-sm leading-tight">{item.name}</div>
+                                                                        <div className="text-gray-400 text-xs mt-0.5">{item.desc}</div>
+                                                                    </div>
+                                                                </Component>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     )}

@@ -8,7 +8,21 @@
 
   color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
+  background-color: #0b1120;
+
+  /* Showcase Colors */
+  --surface: #0f1117;
+  --surface-card: #161b27;
+  --surface-raised: #1e2435;
+  --surface-border: #2a3048;
+  --proxy: #6366f1;
+  --proxy-light: #818cf8;
+  --openai: #10b981;
+  --openai-light: #34d399;
+  --allowed: #10b981;
+  --masked: #f59e0b;
+  --blocked: #ef4444;
+  --review: #8b5cf6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,4 +34,37 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+/* Showcase Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-showcase-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #1e2435 25%, #2a3048 50%, #1e2435 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
 }
