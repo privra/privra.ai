@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X, Cloud, Server, ShieldCheck, PlayCircle } from 'lucide-react';
+import { ChevronDown, Menu, X, Cloud, Server, ShieldCheck, PlayCircle, Target, Users, Globe } from 'lucide-react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,16 +9,17 @@ const Navbar = () => {
     const navLinks = [
         { name: 'HOME', href: '#' },
         { name: 'PRODUCTS', href: '#', dropdown: 'products' },
-        { name: 'DEMOS', href: '#', dropdown: 'demos' }
+        { name: 'DEMOS', href: '#', dropdown: 'demos' },
+        { name: 'ABOUT', href: '#', dropdown: 'about' }
     ];
 
     const products = [
         {
             title: 'Platform',
             items: [
-                { name: 'PrivraAI Cloud', icon: <Cloud className="h-5 w-5" />, desc: 'Fully managed AI security at scale', href: '#' },
-                { name: 'PrivraAI OnPrem', icon: <Server className="h-5 w-5" />, desc: 'Complete control in your infrastructure', href: '#' },
-                { name: 'Bring your Own Cloud', icon: <ShieldCheck className="h-5 w-5" />, desc: 'Seamless integration with your existing setup', href: '#' }
+                { name: 'PrivraAI Cloud', icon: <Cloud className="h-5 w-5" />, desc: 'Fully managed AI security at scale', href: '/about#deployment' },
+                { name: 'PrivraAI OnPrem', icon: <Server className="h-5 w-5" />, desc: 'Complete control in your infrastructure', href: '/about#deployment' },
+                { name: 'Bring your Own Cloud', icon: <ShieldCheck className="h-5 w-5" />, desc: 'Seamless integration with your existing setup', href: '/about#deployment' }
             ]
         },
         {
@@ -43,7 +44,24 @@ const Navbar = () => {
         }
     ];
 
-    const dropdownData = { products, demos };
+    const about = [
+        {
+            title: 'Our Story',
+            items: [
+                { name: 'Mission', icon: <Target className="h-5 w-5" />, desc: 'The Enforcement Layer for AI Applications', href: '/about#mission' },
+                { name: 'Capabilities', icon: <ShieldCheck className="h-5 w-5" />, desc: 'PII Masking, Injection Prevention, Secret Detection', href: '/about#capabilities' }
+            ]
+        },
+        {
+            title: 'Deployment',
+            items: [
+                { name: 'Cloud & On-Prem', icon: <Cloud className="h-5 w-5" />, desc: 'Flexible hosting options for every scale', href: '/about#deployment' },
+                { name: 'Global Compliance', icon: <Globe className="h-5 w-5" />, desc: 'Secure AI traffic globally', href: '/about#compliance' }
+            ]
+        }
+    ];
+
+    const dropdownData = { products, demos, about };
 
     return (
         <nav className="fixed w-full z-50 bg-[#0b1120]/80 backdrop-blur-md border-b border-white/5">
