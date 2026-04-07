@@ -24,7 +24,7 @@ const Navbar = () => {
         {
             title: 'Try Privra AI',
             items: [
-                { name: 'Privra AI Docker', icon: <PlayCircle className="h-5 w-5" />, desc: 'Run locally in minutes', href: 'https://hub.docker.com/r/privra/privra-ai' }
+                { name: 'Privra AI Docker', icon: <PlayCircle className="h-5 w-5" />, desc: 'Run locally in minutes', href: 'https://hub.docker.com/r/privra/privra-ai-unified' }
             ]
         }
     ];
