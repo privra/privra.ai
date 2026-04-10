@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X, Cloud, Server, ShieldCheck, PlayCircle, Target, Users, Globe } from 'lucide-react';
+import { ChevronDown, Menu, X, Cloud, Server, ShieldCheck, PlayCircle, Target, Users, Globe, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
+    const { logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
 
@@ -148,7 +150,15 @@ const Navbar = () => {
                     </div>
 
                     {/* Placeholder for right side */}
-                    <div className="hidden md:block min-w-[200px]"></div>
+                    <div className="hidden md:flex items-center min-w-[200px] justify-end">
+                        <button
+                            onClick={logout}
+                            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors font-['Bebas_Neue'] text-xl tracking-widest px-4 py-2 border border-white/10 rounded-lg hover:bg-white/5"
+                        >
+                            <LogOut className="h-5 w-5" />
+                            <span className="mt-0.5">Logout</span>
+                        </button>
+                    </div>
 
                     {/* Mobile menu button */}
                     <div className="md:hidden">
@@ -177,6 +187,16 @@ const Navbar = () => {
                             {link.name}
                         </a>
                     ))}
+                    <button
+                        onClick={() => {
+                            logout();
+                            setIsMenuOpen(false);
+                        }}
+                        className="flex items-center gap-3 text-red-400 hover:text-red-300 px-3 py-4 text-3xl font-['Bebas_Neue'] tracking-widest w-full text-left"
+                    >
+                        <LogOut className="h-7 w-7" />
+                        <span className="mt-1">Logout</span>
+                    </button>
                 </div>
             )}
         </nav>
