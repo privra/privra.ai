@@ -27,7 +27,17 @@ const Navbar = () => {
         {
             title: 'Try Privra AI',
             items: [
-                { name: 'Privra AI Docker', icon: <PlayCircle className="h-5 w-5" />, desc: 'Run locally in minutes', href: 'https://hub.docker.com/r/privra/privra-ai-unified' }
+                { name: 'Privra AI Docker', icon: <PlayCircle className="h-5 w-5" />, desc: 'Run locally in minutes', href: '/setup-docker' }
+            ]
+        },
+        {
+            title: 'Capabilities',
+            items: [
+                { name: 'PII Masking', icon: <ShieldCheck className="h-5 w-5" />, desc: 'Anonymize sensitive data in real-time', href: '/pii-masking' },
+                { name: 'Injection Defense', icon: <ShieldCheck className="h-5 w-5" />, desc: 'Block prompt injection attacks', href: '/injection-defense' },
+                { name: 'Secret Detection', icon: <ShieldCheck className="h-5 w-5" />, desc: 'Prevent credentials from leaking', href: '/secret-detection' },
+                { name: 'Analytics', icon: <ShieldCheck className="h-5 w-5" />, desc: 'Insights and reporting on AI usage', href: '/analytics' },
+                { name: 'Audit Trail', icon: <ShieldCheck className="h-5 w-5" />, desc: 'Security events and AI traffic log', href: '/audit-trail' }
             ]
         }
     ];
@@ -106,9 +116,9 @@ const Navbar = () => {
                                     {link.dropdown && activeDropdown === link.dropdown && (
                                         <div
                                             onMouseLeave={() => setActiveDropdown(null)}
-                                            className={`absolute left-1/2 -translate-x-1/2 mt-2 top-full bg-[#131d33] border border-white/10 rounded-xl shadow-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-300 z-[100] ${link.dropdown === 'products' ? 'w-[600px]' : 'w-96'}`}
+                                            className={`absolute left-1/2 -translate-x-1/2 mt-2 top-full bg-[#131d33] border border-white/10 rounded-xl shadow-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-300 z-[100] ${link.dropdown === 'products' ? 'w-[850px]' : 'w-96'}`}
                                         >
-                                            <div className={`${link.dropdown === 'products' ? 'grid grid-cols-2 gap-8' : 'space-y-6'}`}>
+                                            <div className={`${link.dropdown === 'products' ? 'grid grid-cols-3 gap-8' : 'space-y-6'}`}>
                                                 {dropdownData[link.dropdown].map((section, idx) => (
                                                     <div key={section.title || idx}>
                                                         {section.title && (

@@ -6,6 +6,12 @@ import Home from './pages/Home';
 import Showcase from './pages/Showcase';
 import About from './pages/About';
 import Login from './pages/Login';
+import Analytics from './pages/Analytics';
+import AuditTrail from './pages/AuditTrail';
+import PIIMasking from './pages/PIIMasking';
+import InjectionDefense from './pages/InjectionDefense';
+import SecretDetection from './pages/SecretDetection';
+import DockerSetup from './pages/DockerSetup';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
@@ -41,6 +47,54 @@ const AppContent = () => {
           element={
             <ProtectedRoute>
               <About />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/audit-trail"
+          element={
+            <ProtectedRoute>
+              <AuditTrail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/pii-masking"
+          element={
+            <ProtectedRoute>
+              <PIIMasking />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/injection-defense"
+          element={
+            <ProtectedRoute>
+              <InjectionDefense />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/secret-detection"
+          element={
+            <ProtectedRoute>
+              <SecretDetection />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/setup-docker"
+          element={
+            <ProtectedRoute>
+              <DockerSetup />
             </ProtectedRoute>
           }
         />
