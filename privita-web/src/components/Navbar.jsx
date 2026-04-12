@@ -140,6 +140,7 @@ const Navbar = () => {
                                                                     key={item.name}
                                                                     {...props}
                                                                     className="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-all group/item"
+                                                                    onClick={() => setActiveDropdown(null)}
                                                                 >
                                                                     <div className="mt-1 text-cyan-400 group-hover/item:scale-110 transition-transform">{item.icon}</div>
                                                                     <div>

@@ -78,34 +78,35 @@ const AuditTrail = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] text-slate-800 pt-32 pb-20 font-sans">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-[#030712] text-white pt-32 pb-20 font-sans relative">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-indigo-900/10 blur-[120px] rounded-full pointer-events-none"></div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header Text */}
                 <div className="mb-12 text-center max-w-3xl mx-auto flex flex-col items-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100/50 border border-indigo-200 text-indigo-700 mb-6 relative">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-900/40 border border-indigo-500/30 text-indigo-400 mb-6 relative">
                         <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
                         <span className="text-xs font-bold tracking-widest uppercase">Immutable Event Log</span>
                     </div>
-                    <h1 className="text-5xl font-['Bebas_Neue'] tracking-widest text-[#0b1120] mb-6">
+                    <h1 className="text-5xl font-['Bebas_Neue'] tracking-widest text-white mb-6 drop-shadow-lg">
                         Complete Audit Trail
                     </h1>
-                    <p className="text-lg text-slate-500 leading-relaxed max-w-2xl">
+                    <p className="text-lg text-gray-400 leading-relaxed max-w-2xl">
                         Investigate and track every AI interaction. Privra maintains a comprehensive ledger of all incoming prompts and outgoing responses, highlighting exact policy violations, calculated risk scores, and mitigation decisions.
                     </p>
                 </div>
 
                 <div className="flex justify-end mb-4">
-                    <span className="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-700 shadow-sm">
+                    <span className="px-4 py-2 bg-[#0b1120] border border-white/10 rounded-full text-sm font-bold text-gray-300 shadow-lg">
                         20 Events Logged
                     </span>
                 </div>
 
                 {/* Table Container */}
-                <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+                <div className="bg-[#0b1120] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="border-b border-slate-100 bg-white/50 text-xs font-bold text-slate-400 tracking-wider">
+                                <tr className="border-b border-white/5 bg-white/5 text-xs font-bold text-gray-500 tracking-wider">
                                     <th className="px-6 py-6 w-32 uppercase">Time</th>
                                     <th className="px-6 py-6 w-40 uppercase">Request ID</th>
                                     <th className="px-6 py-6 w-20 uppercase">Risk</th>
@@ -114,23 +115,23 @@ const AuditTrail = () => {
                                     <th className="px-6 py-6 w-24 uppercase text-center">Config</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-50">
+                            <tbody className="divide-y divide-white/5">
                                 {events.map((event, index) => (
-                                    <tr key={index} className="hover:bg-slate-50 transition-colors">
+                                    <tr key={index} className="hover:bg-white/5 transition-colors">
                                         {/* Time Column */}
                                         <td className="px-6 py-5 whitespace-nowrap">
-                                            <div className="text-sm font-medium text-slate-600">{event.time}</div>
-                                            <div className="text-xs text-slate-400 mt-0.5">{event.date}</div>
+                                            <div className="text-sm font-medium text-gray-300">{event.time}</div>
+                                            <div className="text-xs text-gray-500 mt-0.5">{event.date}</div>
                                         </td>
                                         
                                         {/* Request ID Column */}
                                         <td className="px-6 py-5 font-mono text-sm">
-                                            <a href="#" className="font-bold text-indigo-500 hover:text-indigo-600 hover:underline">{event.reqId}</a>
+                                            <a href="#" className="font-bold text-indigo-400 hover:text-indigo-300 hover:underline">{event.reqId}</a>
                                         </td>
                                         
                                         {/* Risk Column */}
                                         <td className="px-6 py-5 font-bold text-base">
-                                            <span className={event.risk > 0 ? 'text-red-500' : 'text-emerald-500'}>
+                                            <span className={event.risk > 0 ? 'text-rose-500' : 'text-emerald-400'}>
                                                 {event.risk}
                                             </span>
                                         </td>
@@ -138,12 +139,12 @@ const AuditTrail = () => {
                                         {/* Decision Column */}
                                         <td className="px-6 py-5">
                                             {event.decision === 'BLOCKED' ? (
-                                                <div className="inline-flex items-center gap-1.5 text-red-500 font-bold text-xs tracking-wider">
+                                                <div className="inline-flex items-center gap-1.5 text-rose-500 font-bold text-xs tracking-wider">
                                                     <ShieldAlert className="w-4 h-4" />
                                                     BLOCKED
                                                 </div>
                                             ) : (
-                                                <div className="inline-flex items-center gap-1.5 text-emerald-500 font-bold text-xs tracking-wider">
+                                                <div className="inline-flex items-center gap-1.5 text-emerald-400 font-bold text-xs tracking-wider">
                                                     <ShieldCheck className="w-4 h-4" />
                                                     ALLOWED
                                                 </div>
@@ -154,7 +155,7 @@ const AuditTrail = () => {
                                         <td className="px-6 py-5">
                                             <div className="flex flex-wrap gap-2">
                                                 {event.violations.map((violation, idx) => (
-                                                    <span key={idx} className="inline-flex px-2 py-1 bg-[#f1f5f9] text-[#64748b] rounded-md text-[11px] font-semibold tracking-wide border border-slate-200">
+                                                    <span key={idx} className="inline-flex px-2 py-1 bg-white/5 text-gray-400 rounded-md text-[11px] font-semibold tracking-wide border border-white/5">
                                                         {violation}
                                                     </span>
                                                 ))}
@@ -162,7 +163,7 @@ const AuditTrail = () => {
                                         </td>
 
                                         {/* Config Column */}
-                                        <td className="px-6 py-5 text-center text-sm font-medium text-slate-400">
+                                        <td className="px-6 py-5 text-center text-sm font-medium text-gray-500">
                                             {event.config}
                                         </td>
                                     </tr>
